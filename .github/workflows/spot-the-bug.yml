@@ -1,0 +1,23 @@
+name: Spot the Bug
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  spot-the-bug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      # Slither compiles through forge, so Foundry must be on the runner first.
+      - uses: foundry-rs/foundry-toolchain@v1
+
+      - uses: wkalidev/spot-the-bug-action@main
+        with:
+          fail-on: high
