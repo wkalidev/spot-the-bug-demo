@@ -1,12 +1,10 @@
 name: Spot the Bug
 
-on:
-  pull_request:
-
+on: pull_request
 permissions:
   contents: read
   pull-requests: write
-
+  security-events: write
 jobs:
   spot-the-bug:
     runs-on: ubuntu-latest
@@ -14,10 +12,13 @@ jobs:
       - uses: actions/checkout@v7
         with:
           submodules: recursive
-
-      # Slither compiles through forge, so Foundry must be on the runner first.
       - uses: foundry-rs/foundry-toolchain@v1
-
       - uses: wkalidev/spot-the-bug-action@v1
         with:
           fail-on: high
+          slither-args: --sarif ${{ runner.temp }}/slither.sarif
+      - uses: github/codeql-action/upload-sarif@v4
+        if: always() && hashFiles(format('{0}/slither.sarif', runner.temp)) != ''
+        with:
+          sarif_file: ${{ runner.temp }}/slither.sarif
+          category: slither
