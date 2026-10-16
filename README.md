@@ -50,3 +50,5 @@ slither .
 ## License
 
 [MIT](LICENSE)
+
+<!-- test: README-only change, this PR will be closed -->
