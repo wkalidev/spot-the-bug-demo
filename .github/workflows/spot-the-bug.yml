@@ -18,6 +18,6 @@ jobs:
       # Slither compiles through forge, so Foundry must be on the runner first.
       - uses: foundry-rs/foundry-toolchain@v1
 
-      - uses: wkalidev/spot-the-bug-action@v1
+      - uses: wkalidev/spot-the-bug-action@feat/update-stale-comment
         with:
           fail-on: high
