@@ -21,3 +21,8 @@ jobs:
       - uses: wkalidev/spot-the-bug-action@feat/low-only-and-skip-summary
         with:
           fail-on: high
+
+      # Test only: print the job summaries written by earlier steps.
+      - name: Show job summaries
+        if: always()
+        run: cat "$RUNNER_TEMP"/_runner_file_commands/step_summary_* 2>/dev/null || echo "no summary files"
