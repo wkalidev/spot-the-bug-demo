@@ -16,9 +16,9 @@ jobs:
       - uses: wkalidev/spot-the-bug-action@v1
         with:
           fail-on: high
-          slither-args: --sarif ${{ runner.temp }}/slither.sarif
+          slither-args: --sarif ${{ github.workspace }}/slither.sarif
       - uses: github/codeql-action/upload-sarif@v4
-        if: always() && hashFiles(format('{0}/slither.sarif', runner.temp)) != ''
+        if: always() && hashFiles('slither.sarif') != ''
         with:
-          sarif_file: ${{ runner.temp }}/slither.sarif
+          sarif_file: slither.sarif
           category: slither
