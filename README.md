@@ -12,6 +12,13 @@ This is a demo and test bed for **[Spot the Bug](https://github.com/wkalidev/spo
 - `main` holds a clean Foundry project with one safe contract (`src/SafeVault.sol`) and the workflow.
 - `bugs/*` branches add vulnerable contracts. Opening a pull request from one of them into `main` triggers the action so you can see real findings on a real PR.
 
+## Two demo PRs
+
+| PR | Branch | Result |
+| --- | --- | --- |
+| [#1 — Round 1: five classic Solidity bugs](https://github.com/wkalidev/spot-the-bug-demo/pull/1) | `bugs/round-1` | ❌ Red check — 13 findings (6 High, 1 Medium, 6 Low) |
+| [#3 — Round 2: a clean contract](https://github.com/wkalidev/spot-the-bug-demo/pull/3) | `clean/round-2` | ✅ Green check — no issues found |
+
 ## Vulnerable contracts (`bugs/round-1`)
 
 | Contract | Bug | Real-world reference |
@@ -26,9 +33,9 @@ This is a demo and test bed for **[Spot the Bug](https://github.com/wkalidev/spo
 
 `.github/workflows/spot-the-bug.yml` runs on every pull request:
 
-1. `actions/checkout@v4` with submodules (for `forge-std`).
+1. `actions/checkout@v7` with submodules (for `forge-std`).
 2. `foundry-rs/foundry-toolchain@v1` so Slither can compile via `forge`.
-3. `wkalidev/spot-the-bug-action@main` with `fail-on: high`.
+3. `wkalidev/spot-the-bug-action@v1` with `fail-on: high`.
 
 ## Local usage
 
